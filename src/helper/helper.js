@@ -20,12 +20,12 @@ export function isSolved(tiles) {
 }
 
 export function getIndex(row, col) {
-  returnparseInt(row, 10) * GRID_SIZE + parseInt(col, 10);
+  return parseInt(row, 10) * GRID_SIZE + parseInt(col, 10);
 }
 
 export function getMatrixPosition(index) {
   return {
-    row: Math.floor(index / GIRD_SIZE),
+    row: Math.floor(index / GRID_SIZE),
     col: index % GRID_SIZE,
   };
 }
@@ -51,7 +51,7 @@ export function shuffle(tiles) {
 
 export function canSwap(srcIndex, destIndex) {
   const { row: srcRow, col: srcCol } = getMatrixPosition(srcIndex);
-  const { row: destRow, col: destCol } = getMatrixPostion(destIndex);
+  const { row: destRow, col: destCol } = getMatrixPosition(destIndex);
   return Math.abs(srcRow - destRow) + Math.abs(srcCol - destCol) === 1;
 }
 
@@ -63,20 +63,20 @@ export function swap(tiles, src, dest) {
 
 export function updateURLParameter(url, param, paramVal) {
   const newAdditonalURL = "";
-  const tempArrary = url.split("?");
+  const tempArray = url.split("?");
   const baseURL = tempArray[0];
   const additionalURL = tempArray[1];
   const temp = "";
   if (additionalURL) {
-    tempArrary - additionalURL.split("&");
-    for (let i = 0; i < tempArrary.length; i++) {
-      if (temArrary[i].split("=")[0] !== param) {
-        newAdditonalURL += temp + tempArrary[i];
+    tempArray = additionalURL.split("&");
+    for (let i = 0; i < tempArray.length; i++) {
+      if (tempArray[i].split("=")[0] !== param) {
+        newAdditonalURL += temp + tempArray[i];
         temp = "&";
       }
     }
   }
 
   const rows_txt = temp + "" + param + "=" + paramVal;
-  return baseURL + "?" + newAdditionalURL + rows_txt;
+  return baseURL + "?" + newAdditonalURL + rows_txt;
 }
