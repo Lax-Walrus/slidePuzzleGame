@@ -1,8 +1,9 @@
 import { TILE_COUNT, GRID_SIZE } from "../constants/boardConstants";
 
+// Credits to https://codepen.io/unindented/pen/QNWdRQ
 export function isSolvable(tiles) {
   let product = 1;
-  for (let i = 1, l = TILE_COUNT - 1; i <= 1; i++) {
+  for (let i = 1, l = TILE_COUNT - 1; i <= l; i++) {
     for (let j = i + 1, m = l + 1; j <= m; j++) {
       product *= (tiles[i - 1] - tiles[j - 1]) / (i - j);
     }
@@ -11,7 +12,7 @@ export function isSolvable(tiles) {
 }
 
 export function isSolved(tiles) {
-  for (let i = 0, l = TILE_COUNT - 1; i <= l; i++) {
+  for (let i = 0, l = tiles.length; i < l; i++) {
     if (tiles[i] !== i) {
       return false;
     }
@@ -19,10 +20,12 @@ export function isSolved(tiles) {
   return true;
 }
 
+// Get the linear index from a row/col pair.
 export function getIndex(row, col) {
   return parseInt(row, 10) * GRID_SIZE + parseInt(col, 10);
 }
 
+// Get the row/col pair from a linear index.
 export function getMatrixPosition(index) {
   return {
     row: Math.floor(index / GRID_SIZE),
@@ -62,21 +65,21 @@ export function swap(tiles, src, dest) {
 }
 
 export function updateURLParameter(url, param, paramVal) {
-  const newAdditonalURL = "";
-  let tempArray = url.split("?");
-  const baseURL = tempArray[0];
-  const additionalURL = tempArray[1];
-  const temp = "";
+  var newAdditionalURL = "";
+  var tempArray = url.split("?");
+  var baseURL = tempArray[0];
+  var additionalURL = tempArray[1];
+  var temp = "";
   if (additionalURL) {
     tempArray = additionalURL.split("&");
-    for (let i = 0; i < tempArray.length; i++) {
+    for (var i = 0; i < tempArray.length; i++) {
       if (tempArray[i].split("=")[0] !== param) {
-        newAdditonalURL += temp + tempArray[i];
+        newAdditionalURL += temp + tempArray[i];
         temp = "&";
       }
     }
   }
 
-  const rows_txt = temp + "" + param + "=" + paramVal;
-  return baseURL + "?" + newAdditonalURL + rows_txt;
+  var rows_txt = temp + "" + param + "=" + paramVal;
+  return baseURL + "?" + newAdditionalURL + rows_txt;
 }

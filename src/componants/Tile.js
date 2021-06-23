@@ -1,10 +1,11 @@
 import React from "react";
-import { BOARD_SIZE, GRID_SIZE, TILE_COUNT } from "../constants/boardConstants";
-import { getMatrixPosition, getVisualPosition } from "../helper/helper";
 import { Motion, spring } from "react-motion";
+import { getMatrixPosition, getVisualPosition } from "../helper/helper";
+import { TILE_COUNT, GRID_SIZE, BOARD_SIZE } from "../constants/boardConstants";
 
-export default function Tile(props) {
+function Tile(props) {
   const { tile, index, width, height, handleTileClick, imgUrl } = props;
+  console.log("img in tile", imgUrl);
   const { row, col } = getMatrixPosition(index);
   const visualPos = getVisualPosition(row, col, width, height);
   const tileStyle = {
@@ -14,7 +15,7 @@ export default function Tile(props) {
     translateY: visualPos.y,
     backgroundImage: `url(${imgUrl})`,
     backgroundSize: `${BOARD_SIZE * 1.25}px`,
-    backgroundposition: `${(100 / GRID_SIZE) * (tile % GRID_SIZE)}% ${
+    backgroundPosition: `${(100 / GRID_SIZE) * (tile % GRID_SIZE)}% ${
       (100 / GRID_SIZE) * Math.floor(tile / GRID_SIZE)
     }%`,
   };
@@ -30,6 +31,7 @@ export default function Tile(props) {
           style={{
             ...tileStyle,
             transform: `translate3d(${translateX}px, ${translateY}px, 0)`,
+            // Is last tile?
             opacity: tile === TILE_COUNT - 1 ? 0 : 1,
           }}
           className="tile"
@@ -41,3 +43,5 @@ export default function Tile(props) {
     </Motion>
   );
 }
+
+export default Tile;

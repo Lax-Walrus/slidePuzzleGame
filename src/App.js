@@ -1,5 +1,5 @@
-import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, componentDidMount } from "react";
+// import Image from "..src/images/tileImageGame";
 import Board from "./componants/board";
 import { updateURLParameter } from "./helper/helper";
 
@@ -8,10 +8,10 @@ function App() {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    if (URLSearchParams.has("img")) {
+    if (urlParams.has("img")) {
       setImgUrl(urlParams.get("img"));
     }
-  }, []);
+  }, [setImgUrl]);
 
   const handleImageChange = (e) => {
     setImgUrl(e.target.value);
@@ -25,6 +25,7 @@ function App() {
     <div className="App">
       <h1> Solve the Puzzle </h1>
       <Board imgUrl={imgUrl} />
+
       <input value={imgUrl} onChange={handleImageChange} />
     </div>
   );
