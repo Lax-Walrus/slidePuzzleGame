@@ -6,7 +6,7 @@ import { canSwap, shuffle, swap, isSolved } from "../helper/helper";
 export default function board() {
   function Board({ imgUrl }) {
     const [tiles, setTiles] = useState([...Array(TILE_COUNT).keys()]);
-    const [isSloved, setIsSolved] = useState(false);
+
     const [isStarted, setIsStarted] = useState(false);
 
     const shuffledTiles = () => {
